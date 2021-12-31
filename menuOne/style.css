@@ -1,0 +1,64 @@
+img {   /*задается в начале верстки для удобства */
+    max-width: 100%; /* 4) соотношение максимальной ширины картинки, по отношению элемента, в который она вложена */
+    height: auto;  /*5) высота автоматическая, будет меняться в зависимости от ширины, чтобы картинка не изменила свои пропорции */
+}
+
+
+.menuItem {
+    margin: 10px;                  /*1)задали оступы */
+    background: #4270f0;         /*2)задали фон */
+    width: 300px;                  /*3)задали широну элемента */
+    padding: 10px;                  /*6) отступы внутри элемента от края */
+    border-radius: 10px;            /*7)скругленные края */
+    text-align: center;            /*8) центровка текста, вложенного в элемент */
+}
+
+.menuItem_image{
+    margin-bottom: 6px;  /*9) поля для картинки снизу */
+}
+.menuItem_link {              /*10) оформление ссылки */
+    color:#fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+
+.menuItem_link::before, .menuItem_link::after {
+    content: "";                    /*12) для того чтобы непосредственно треугольник появился */
+	width: 0;                      /*создаем псевдоэлемент и строку content для отображения*/
+	height: 0;                              /*13 общие правила для обоих труегольников*/
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    display: inline-block;                  /*для правильного размещения */
+    opacity: 0;                              /* 14) по умолчанию труегольники прозрачны */
+    transition: opacity 0.5s, transform 0.5s;             /* 15)для opacity задается время перехода в другое состояние */
+    
+}
+
+.menuItem_link::before {              
+    border-right: 16px solid white ;        /*13) свойство для левого труегольника */
+    transform:translateX(-40px);              /*13) смещение */
+}
+	 
+
+.menuItem_link::after {              
+border-left: 16px solid white;             /*13)свойство для правого треугольника */
+transform:translateX(40px);               /*13) смещение */
+}
+
+
+.menuItem:hover .menuItem_link::before, .menuItem:hover .menuItem_link::after {
+/* есть menuItem, когда мы на него наведем, мы перейдем к влженному тегу menuItem_link, и возьмем его*/
+/*псевдоэлемент before*/    
+opacity: 1; /*15) через селектор menuItem с псевдоклассом hover тянемся во вложенные в него селекторы с */
+}    /*15) с псевдоэлментами и убираем прозрачность */
+
+
+.menuItem_link:hover::before {   /*16) обращаемся к наведенной мышью ссылке, через него к псевдоэлементку before */
+    transform: translateX(-10px) rotate(180deg); /* запись - :псевдокласс:: псевдоэлемент */
+    }
+
+.menuItem_link:hover::after {   /*16) обращаемся к наведенной мышью ссылке, через него к псевдоэлементку after */
+        transform: translateX(10px) rotate(-180deg); /* запись - :псевдокласс:: псевдоэлемент */
+        
+    }
